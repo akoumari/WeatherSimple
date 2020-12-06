@@ -6,7 +6,7 @@ function WeatherContainer() {
   useEffect(() => {
     setAppState({ loading: true });
     const apiUrl =
-      "http://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=85c7db7f42d6af038fe9dced342805b3";
+      "http://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=";
     axios.get(apiUrl).then((weather) => {
       const currWeather = weather.data;
       console.log(weather.data);
