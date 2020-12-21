@@ -1,6 +1,6 @@
 # 101075604_comp3123_a2
 
-![plot](./display.PNG)
+![plot](./preview.PNG)
 
 
 
