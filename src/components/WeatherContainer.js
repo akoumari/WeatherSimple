@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
+import Tooltip from "@material-ui/core/Tooltip";
 import axios from "axios";
 
 function WeatherContainer(props) {
@@ -14,7 +17,6 @@ function WeatherContainer(props) {
       const currWeather = weather.data;
       console.log(weather.data);
       setTimeout(() => {
-       
         setAppState({ loading: false, weather: currWeather });
         setWeather({
           description: currWeather.weather[0].description,
@@ -27,6 +29,7 @@ function WeatherContainer(props) {
           windSpeed: currWeather.wind.speed + " km/h",
           windDir: {
             direction: Math.floor(currWeather.wind.deg / 45),
+            exactDirection: currWeather.wind.deg,
             isExact: currWeather.wind.deg % 45 == 0,
           },
           rise: new Date(currWeather.sys.sunrise * 1000).toLocaleTimeString(
@@ -95,28 +98,50 @@ function WeatherContainer(props) {
   };
   return (
     <div className={"col-6"}>
-        <div
-          className={
-            "col-12 p-2 shadow p-3 mb-5 bg-white rounded align-self-center align-items-center card"
-          }
-          >
-          {appState.loading == false && appState.weather != ""? (
-            <>
-          <h1 className={""}><img
-                  className="icons"
-                  src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                  alt={weather.description}
-                ></img>{weather.location}</h1>
+      <div
+        className={
+          "col-12 p-2 shadow p-3 mb-5 bg-white rounded align-self-center align-items-center card"
+        }
+      >
+        {appState.loading == false && appState.weather != "" ? (
+          <>
+            <h1 className={""}>
+              <img
+                className="icons"
+                src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                alt={weather.description}
+              ></img>
+              {weather.location}
+            </h1>
             <div className={" justify-content-between row mt-3"}>
               {console.log(weather)}
 
-              <div className={"col-auto bg-white rounded m-1 align-self-center"}>
-                
+              <div
+                className={"col-auto bg-white rounded m-1 align-self-center"}
+              >
                 <h6>Weather: {weather.description}</h6>
                 <h6>Humidity: {weather.humidity}</h6>
                 <h6>
-                  Wind Speed: {weather.windSpeed}{" "}
-                  {getDirection(weather.windDir)}
+                  <Tooltip
+                    title={`${weather.windDir.exactDirection}°  ${getDirection(
+                      weather.windDir
+                    )}`}
+                    placement="top-end"
+                    
+                  >
+                    <div className={" align-items-center"}>
+                      Wind Speed: {weather.windSpeed}{" "}
+                      <div className={" d-inline "}>
+                        <FontAwesomeIcon
+                          icon={faAngleDoubleUp}
+                          width="40"
+                          height="40"
+                          color={"#000"}
+                          transform={{ rotate: weather.windDir.exactDirection }}
+                        />
+                      </div>
+                    </div>
+                  </Tooltip>
                 </h6>
 
                 <h6>Sunrise: {weather.rise}</h6>
@@ -139,7 +164,11 @@ function WeatherContainer(props) {
                   </div>
                   <div className={"row justify-content-between"}>
                     <div className={"align-self-center"}>Feels Like:</div>
-                    <div className={"m-1 btn-sm active rounded   btn-outline-success"}>
+                    <div
+                      className={
+                        "m-1 btn-sm active rounded   btn-outline-success"
+                      }
+                    >
                       {~~weather.feels_like + " °C"}
                     </div>
                   </div>
@@ -156,16 +185,15 @@ function WeatherContainer(props) {
                 </div>
                 <div className={"row "}></div>
               </div>
-            </div></>
-          ):
+            </div>
+          </>
+        ) : (
           <div className={""}>
             <span class="spinner-grow spinner-grow-sm mx-1"></span>
-   Loading..
+            Loading..
           </div>
-          
-          }
-        </div>
-      
+        )}
+      </div>
     </div>
   );
 }
