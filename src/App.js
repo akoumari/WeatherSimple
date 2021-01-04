@@ -50,7 +50,13 @@ function App() {
       } )
       console.log(local)
       if(local.length>1){
-        setLocCity(local[0].id)
+        if(locCity==local[0].id){
+          setLocCity("")
+          setTimeout(() => {
+            
+            setLocCity(local[0].id)
+          },50)
+        }
       }
     
   });
