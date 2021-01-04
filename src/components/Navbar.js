@@ -77,15 +77,19 @@ function NavBar(props) {
           </Navbar.Brand>
           <div className={"row align-items-center justify-content-between"}>
 
-          <input className={"form-input m-1"} onChange={(e)=>handleChange(e.target.value)} value={value} /><button className={"btn btn-primary"} onClick={()=> {setSearchQuery(value)}}>{isFetching?<div class="spinner-border">Get Cities</div>:"Get Cities"}</button>
           <DropdownButton
             variant={"btn-dark text-light"}
             as="h1"
             id="dropdown-item-button"
             title={"Cities"}
-            onClick={()=>setDrop(!drop)}
-            show={drop}
+           
+            // onClick={()=>setDrop(!drop)}
+            // show={drop}
           >
+            <div className={"row m-1 align-items-center justify-content-center"}>
+
+          <input className={"form-input mb-1 w-100 shadow-sm bg-white rounded"} onChange={(e)=>handleChange(e.target.value)} value={value} /><button className={"btn  shadow-sm w-100 btn-sm btn-outline-info"} onClick={()=> {setSearchQuery(value)}}>{isFetching?<div class="spinner-border">Get Cities</div>:"Get Cities"}</button>
+            </div>
             {options.map((indvCity) => (
                 <Dropdown.Item
                   onClick={() => sendHandleCity(indvCity)}
