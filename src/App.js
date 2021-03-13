@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import WeatherContainer from "./components/WeatherContainer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,7 @@ import cities from "./city.list.json";
 function App() {
   const [city, setCity] = useState(2643743);
   const [locCity, setLocCity] = useState(2643743);
+  const [locCityBox, setLocCityBox] = useState(<WeatherContainer city={`id=${locCity}`} />);
   const handleCity = (newCity) =>{
     setCity(newCity)
     console.log(newCity)
@@ -56,11 +57,19 @@ function App() {
             
             setLocCity(local[0].id)
           },50)
+        }else{
+          setLocCity(local[0].id)
+
         }
       }
-    
-  });
-}
+      
+    });
+  }
+  useEffect(() => {
+  setLocCityBox("")
+setLocCityBox(<WeatherContainer city={`id=${locCity}`} />)
+console.log(locCity)
+}, [locCity])
   return (
     <>
       <Navbar handleCity={handleCity} />
@@ -75,7 +84,7 @@ function App() {
             />Use location</button>
        
           <div className={"row d-flex justify-content-between p-5"}>
-            <WeatherContainer city={`id=${locCity}`} />
+            {locCityBox}
             <WeatherContainer city={"id=5128581"} />
 
           </div>

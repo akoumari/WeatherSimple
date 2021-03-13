@@ -28,7 +28,12 @@ function NavBar(props) {
   const [isFetching, setIsFetching] = useState(false);
   const [drop, setDrop] = useState(false);
 
-  const handleChange = (value) => setValue(value);
+  const handleChange = (value) => {
+    setValue(value)
+    if(value==""){
+      setOptions(cityOptions)
+    }
+  };
   const sendHandleCity = (city) => {
     handleCity(city.value);
   };
