@@ -1,0 +1,16 @@
+// $primary: #b33771;
+// $enable-rounded: false;
+//$warning: hsla(13, 60%, 50%,.75) ;
+$warning: hsla(29, 84%, 50%,.75) ;
+$primary: hsla(211, 93%, 46%, 0.70);
+$info: hsla(188,70,42.2,.75);
+$danger: rgba(240, 9, 1, 0.85);
+$success: rgba(21, 177, 21, 0.85);
+$light: rgba(247, 247, 247,0.95);
+$white: rgba(255, 255, 255,1);
+$dark: rgba(0, 0, 0,.90);
+border-white{
+    border: 1px solid rgba(104, 104, 104, 0.9) !important;
+}
+// Leave this import at the bottom
+@import "node_modules/bootstrap/scss/bootstrap";

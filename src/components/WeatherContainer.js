@@ -12,7 +12,7 @@ function WeatherContainer(props) {
 
   useEffect(() => {
     setAppState({ loading: true });
-    const apiUrl = `http://api.openweathermap.org/data/2.5/weather?${city}&appid=${api}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?${city}&appid=${api}`;
     axios.get(apiUrl).then((weather) => {
       const currWeather = weather.data;
       console.log(weather.data);
@@ -97,14 +97,18 @@ function WeatherContainer(props) {
     }
   };
   return (
-    <div className={"col-6"}>
+    <div style={{minHeight: "100%"}} className={"col-xl-6 my-3 col-12"}>
       <div
+      style={{minHeight: "100%"}}
         className={
-          "col-12 p-2 shadow p-3 mb-5 bg-white rounded align-self-center align-items-center card"
+          "col-12 row p-2 shadow p-3 mb-5  d-flex align-self-center align-items-center justify-content-center round-box bg-zero useBorder"
         }
       >
         {appState.loading == false && appState.weather != "" ? (
           <>
+          <div className={
+          "col-12 "
+        }>
             <h1 className={""}>
               <img
                 className="icons"
@@ -113,22 +117,46 @@ function WeatherContainer(props) {
               ></img>
               {weather.location}
             </h1>
-            <div className={" justify-content-between row mt-3"}>
+
+          </div>
+          <div className={
+            "col-12 d-flex justify-content-center align-items-center"
+          }>
+            <div className={"d-flex justify-content-center ml-lg-1 row mt-3"}>
               {console.log(weather)}
 
               <div
-                className={"col-auto bg-white rounded m-1 align-self-center"}
-              >
+             
+                className={"col-lg-6 col-12  p-1"}
+                >
+              <div
+              style={{height: "100%"}}
+                className={"col-12 bg-cleard useBorder rounded my-1 py-1 align-self-center d-flex row align-items-center"}
+                >
+                <div
+             
+                className={"col-12 "}
+                >
                 <h6>Weather: {weather.description}</h6>
+                </div>
+                 <div
+             
+                className={"col-12 "}
+                >
                 <h6>Humidity: {weather.humidity}</h6>
+                   </div>
+                    <div
+             
+                className={"col-12 "}
+                >
                 <h6>
                   <Tooltip
                     title={`${weather.windDir.exactDirection}°  ${getDirection(
                       weather.windDir
-                    )}`}
-                    placement="top-end"
-                    
-                  >
+                      )}`}
+                      placement="top-end"
+                      
+                      >
                     <div className={" align-items-center"}>
                       Wind Speed: {weather.windSpeed}{" "}
                       <div className={" d-inline "}>
@@ -138,52 +166,84 @@ function WeatherContainer(props) {
                           height="40"
                           color={"#000"}
                           transform={{ rotate: weather.windDir.exactDirection }}
-                        />
+                          />
                       </div>
                     </div>
                   </Tooltip>
                 </h6>
-
+   </div> <div
+             
+                className={"col-12 "}
+                >
                 <h6>Sunrise: {weather.rise}</h6>
+                   </div> <div
+             
+                className={"col-12 "}
+                >
                 <h6>Sunset: {weather.set}</h6>
+   </div>
               </div>
+              </div>
+              
               <div
+             
+                className={"col-lg-6 col-12 p-1"}
+                >
+              <div
+              style={{minHeight: "100%"}}
                 className={
-                  " col-auto mb-3  shadow-lg px-3 py-2 justify-content-center bg-dark text-light rounded "
+                  " col-12 row my-1 shadow-lg px-3 py-2 justify-content-center bg-cleard useBorder text-light rounded "
                 }
-              >
-                <div className={" "}>
+                >
+                <div className={" row "}>
                   <h4>Tempurature</h4>
                 </div>
-                <div className={"col "}>
-                  <div className={"row justify-content-between"}>
+                <div className={"row d-flex justify-content-center"}>
+                  <div className={"col col-6 justify-content-between"}>
                     <div className={"align-self-center "}>Current:</div>
-                    <div className={"m-1 btn-sm active btn-success "}>
+                    </div>
+                  <div className={"col col-xl-5 col-4  justify-content-between"}>
+                    <div className={"m-1 btn-sm active py-0  col col-8  col-xl-12 text-center btn-success "}>
                       {~~weather.currTemp + " °C"}
                     </div>
                   </div>
-                  <div className={"row justify-content-between"}>
-                    <div className={"align-self-center"}>Feels Like:</div>
-                    <div
-                      className={
-                        "m-1 btn-sm active rounded   btn-outline-success"
+               
+                  <div className={"col col-6 justify-content-between"}>
+                    <div className={"align-self-center "}>Feels Like:</div>
+                    </div>
+                  <div className={"col col-xl-5 col-4  justify-content-between"}>
+                    <div className={"m-1 btn-sm active py-0 col col-8  col-xl-12 text-center btn-outline-success"
                       }
-                    >
+                      >
                       {~~weather.feels_like + " °C"}
                     </div>
                   </div>
-                  <div className={"row justify-content-between"}>
-                    <div className={"align-self-center"}>Min/Max:</div>
-                    <div className={"m-1 btn-sm active  btn-primary"}>
-                      {~~weather.minTemp + " °C"}
+        
+                  <div className={"col col-6 justify-content-between"}>
+                    <div className={"align-self-center "}>Low:</div>
                     </div>
-                    <div className={"align-self-center"}>|</div>
-                    <div className={"m-1 btn-sm active  btn-danger"}>
-                      {~~weather.maxTemp + " °C"}
+                  <div className={"col col-xl-5 col-4 justify-content-between"}>
+                    <div className={"m-1 btn-sm active py-0 col col-8  col-xl-12 text-center btn-outline-primary"
+                      }
+                      >
+                     {~~weather.minTemp + " °C"}
                     </div>
                   </div>
+               
+                  <div className={"col col-6 justify-content-between"}>
+                    <div className={"align-self-center "}>High:</div>
+                    </div>
+                  <div className={"col col-xl-5 col-4  justify-content-between"}>
+                    <div className={"m-1 btn-sm active py-0  col col-8  col-xl-12 text-center btn-outline-danger"
+                      }
+                      >
+                       {~~weather.maxTemp + " °C"}
+                    </div>
+                  </div>
+                 
                 </div>
                 <div className={"row "}></div>
+        </div> </div>
               </div>
             </div>
           </>
@@ -195,7 +255,7 @@ function WeatherContainer(props) {
         )}
       </div>
     </div>
-  );
-}
-
+    );
+  }
+  
 export default WeatherContainer;

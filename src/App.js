@@ -72,26 +72,26 @@ console.log(locCity)
 }, [locCity])
   return (
     <>
-      <Navbar handleCity={handleCity} />
-      <div className={"container"}>
-      
-       <button className={"btn mt-1 btn-sm btn-info"} onClick={getLocal}><FontAwesomeIcon
+      <Navbar locButt={ <button className={"btn mt-1 btn-sm btn-info"} onClick={getLocal}><FontAwesomeIcon
               icon={faMapMarkerAlt}
               width="70"
               height="30"
               color={"000"}
               className="d-inline-block mr-2"
-            />Use location</button>
+            />Use location</button>} handleCity={handleCity} />
+      <div className={"container"}>
+      
+      
        
           <div className={"row d-flex justify-content-between p-5"}>
             {locCityBox}
             <WeatherContainer city={"id=5128581"} />
+            <WeatherContainer city={"q=Athens"} />
+            <WeatherContainer city={`id=${city}`} />
 
           </div>
         
           <div className={"row  justify-content-center p-5"}>
-            <WeatherContainer city={"q=Athens"} />
-            <WeatherContainer city={`id=${city}`} />
 
           </div>
       </div>
